@@ -168,7 +168,7 @@ You can't easily pipette 2.4 microliters of liquid by hand (that's about 1/20th 
 2. Adds the Lipofectamine transfection reagents
 3. Gently pipettes the mixture onto the cells growing in a plate
 
-See [08-physical-protocol-walkthrough.md](08-physical-protocol-walkthrough.md) for the full step-by-step physical process.
+See [Physical Protocol Walkthrough](../reference/physical-protocol-walkthrough.md) for the full step-by-step physical process.
 
 ## What You Get at the End
 

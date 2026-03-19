@@ -46,10 +46,10 @@ Total: 150 + 50 + 100 + 50 + 100 + 200 = **650 ng**
 
 ### Expected Result
 
-| Color | Status | Why |
-|-------|--------|-----|
-| Blue (eBFP2) | ON | Constitutive control |
-| Maroon (mMaroon1) | ON | Constitutive control |
+| Color              | Status  | Why                           |
+|--------------------+---------+-------------------------------|
+| Blue (eBFP2)       | ON      | Constitutive control          |
+| Maroon (mMaroon1)  | ON      | Constitutive control          |
 | Green (mNeonGreen) | **OFF** | CasE is active and cutting it |
 
 ### What Makes This Interesting
@@ -171,7 +171,7 @@ Csy4 (input) ──inhibits──► CasE (via Csy4_rec_CasE)
 
 AND gate output: CasE_rec_Csy4_rec_mKO2
   - Csy4 present → cuts mKO2 mRNA → orange OFF
-  - CasE absent (killed by Csy4) → can't cut mKO2 mRNA
+  - CasE absent (Csy4 inhibits CasE) → can't cut mKO2 mRNA
   - But Csy4 alone is enough to kill it → orange OFF
 ```
 

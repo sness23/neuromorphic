@@ -29,10 +29,10 @@ Three inhibitions = green is **OFF**. (Odd number of negatives = negative.)
 |-------|---------|--------|------|
 | X1 | PgU | 150 ng | Input enzyme |
 | X1 | eBFP2 | 50 ng | Blue control light |
-| X2 | PgU_rec_Csy4 | 100 ng | Csy4, killed by PgU |
+| X2 | PgU_rec_Csy4 | 100 ng | Encodes Csy4; PgU inhibits |
 | X2 | mMaroon1 | 50 ng | Maroon control light |
-| X3 | Csy4_rec_CasE | 100 ng | CasE, killed by Csy4 |
-| Bias | CasE_rec_mNeonGreen | 200 ng | Green, killed by CasE |
+| X3 | Csy4_rec_CasE | 100 ng | Encodes CasE; Csy4 inhibits |
+| Bias | CasE_rec_mNeonGreen | 200 ng | Encodes green; CasE inhibits |
 
 **Expected result:** Blue ON, Maroon ON, Green **OFF**
 
@@ -56,7 +56,7 @@ We include both ERNs, so orange is **OFF**.
 |-------|---------|--------|------|
 | X1 | CasE | 100 ng | Inhibitor 1 |
 | X2 | Csy4 | 100 ng | Inhibitor 2 |
-| Output | CasE_rec_Csy4_rec_mKO2 | 200 ng | Orange, killed by either |
+| Output | CasE_rec_Csy4_rec_mKO2 | 200 ng | Encodes orange; CasE or Csy4 inhibits |
 | Control | eBFP2 | 100 ng | Blue control light |
 | Control | mNeonGreen | 150 ng | Green control light |
 
@@ -81,10 +81,10 @@ Csy4 (dead) ──can't kill──▶ CasE (survives, but has nothing to do)
 |-------|---------|--------|------|
 | X1 | PgU | 200 ng | Dominant enzyme |
 | X1 | eBFP2 | 50 ng | Blue control light |
-| X2 | PgU_rec_Csy4 | 100 ng | Csy4, killed by PgU |
+| X2 | PgU_rec_Csy4 | 100 ng | Encodes Csy4; PgU inhibits |
 | X2 | mMaroon1 | 50 ng | Maroon control light |
-| X3 | Csy4_rec_CasE | 100 ng | CasE, freed because Csy4 is dead |
-| Bias | PgU_rec_mNeonGreen | 150 ng | Green, killed by PgU |
+| X3 | Csy4_rec_CasE | 100 ng | Encodes CasE; Csy4 inhibits (but Csy4 is dead, so CasE survives) |
+| Bias | PgU_rec_mNeonGreen | 150 ng | Encodes green; PgU inhibits |
 
 **Expected result:** Blue ON, Maroon ON, Green **OFF**
 
@@ -107,7 +107,7 @@ CasE (dead) ──┘
 | Group | Plasmid | Amount | Role |
 |-------|---------|--------|------|
 | X1 | Csy4 | 150 ng | Input enzyme |
-| X2 | Csy4_rec_CasE | 100 ng | CasE, killed by Csy4 |
+| X2 | Csy4_rec_CasE | 100 ng | Encodes CasE; Csy4 inhibits |
 | Output | CasE_rec_Csy4_rec_mKO2 | 150 ng | Orange AND gate |
 | Control1 | eBFP2 | 100 ng | Blue control light |
 | Control2 | mMaroon1 | 50 ng | Maroon control light |

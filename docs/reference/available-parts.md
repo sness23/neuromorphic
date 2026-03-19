@@ -28,7 +28,7 @@ A fluorescent reporter whose mRNA contains a recognition sequence for an ERN. Th
 - `Csy4_rec_mNeonGreen` -- Csy4 inhibits mNeonGreen
 - `CasE_rec_mNeonGreen` -- CasE inhibits mNeonGreen
 - `PgU_rec_mNeonGreen` -- PgU inhibits mNeonGreen
-- `CasE_rec_Csy4_rec_mKO2` -- mKO2 inhibited by both CasE and Csy4
+- `CasE_rec_Csy4_rec_mKO2` -- CasE and Csy4 both inhibit mKO2 (either alone is sufficient)
 
 ### 4. Colors (Unregulated Reporters)
 

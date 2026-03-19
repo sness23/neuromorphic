@@ -99,11 +99,11 @@ Total: 100 + 100 + 200 + 100 + 150 = **650 ng**
 
 ### Expected Result
 
-| Color | Status | Why |
-|-------|--------|-----|
-| Blue (eBFP2) | ON | Constitutive control |
-| Green (mNeonGreen) | ON | Constitutive control, no one cutting it |
-| Orange (mKO2) | **OFF** | Both CasE and Csy4 are present, either one cuts it |
+| Color              | Status  | Why                                                |
+|--------------------+---------+----------------------------------------------------|
+| Blue (eBFP2)       | ON      | Constitutive control                               |
+| Green (mNeonGreen) | ON      | Constitutive control, no one cutting it            |
+| Orange (mKO2)      | **OFF** | Both CasE and Csy4 are present, either one cuts it |
 
 ### What Makes This Interesting
 

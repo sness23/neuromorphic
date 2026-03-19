@@ -47,7 +47,7 @@ No ERN present. mNeonGreen mRNA is never cut. Green fluorescence is produced nor
 ### Green OFF wells (12 wells)
 
 ```
-CasE ──wrecks──▶ CasE_rec_mNeonGreen ──X──▶ NO GREEN
+CasE ──cleaves──▶ CasE_rec_mNeonGreen ──X──▶ NO GREEN
 eBFP2                                  ──▶ BLUE GLOW (control)
 ```
 
@@ -55,7 +55,7 @@ CasE is present and active. It finds the CasE recognition sequence on mNeonGreen
 
 | Plasmid | Amount | Role |
 |---------|--------|------|
-| CasE | 150 ng | ERN enzyme; wrecks mNeonGreen mRNA |
+| CasE | 150 ng | ERN enzyme; recognizes and cleaves mNeonGreen mRNA |
 | CasE_rec_mNeonGreen | 200 ng | Encodes mNeonGreen; CasE inhibits |
 | eBFP2 | 100 ng | Blue transfection control |
 

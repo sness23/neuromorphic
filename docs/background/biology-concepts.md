@@ -139,6 +139,34 @@ The plasmid **produces Y**, but Y's mRNA has X's recognition sequence embedded i
 | What happens if NEITHER is in the cell? | Nobody cuts it → **orange ON** |
 | **Summary:** | **Either CasE or Csy4 (or both) inhibits mKO2** |
 
+### How to think about it: ERNs scan for their own tag
+
+Each ERN is constantly scanning all mRNA in the cell, looking for **its own** recognition site — a specific RNA hairpin (~28-36 nucleotides) that acts like a barcode. Any mRNA carrying that barcode gets cut and destroyed.
+
+The `_rec_` in a part name **is** that barcode, physically engineered into the mRNA:
+
+```
+PgU (the enzyme) scans all mRNA...
+
+  mRNA from PgU_rec_Csy4        →  Has PgU's barcode!  →  CUT. No Csy4 made.
+  mRNA from PgU_rec_CasE        →  Has PgU's barcode!  →  CUT. No CasE made.
+  mRNA from PgU_rec_mNeonGreen  →  Has PgU's barcode!  →  CUT. No green.
+  mRNA from Csy4_rec_CasE       →  No PgU barcode.     →  SAFE. Ignored.
+  mRNA from mKO2                →  No PgU barcode.     →  SAFE. Ignored.
+```
+
+The same logic applies to each ERN — it only sees its own barcode:
+
+```
+CasE scans for CasE_rec    →  cuts any mRNA tagged with CasE_rec
+Csy4 scans for Csy4_rec    →  cuts any mRNA tagged with Csy4_rec
+PgU  scans for PgU_rec     →  cuts any mRNA tagged with PgU_rec
+```
+
+They are completely independent. CasE cannot see `Csy4_rec`. Csy4 cannot see `PgU_rec`. This **orthogonality** is what makes it possible to wire complex circuits — each connection is a specific barcode on a specific mRNA, and only the matching enzyme can cut it.
+
+**Reading the name:** `X_rec_Y` → "X's **rec**ognition site is on Y's mRNA" → X recognizes and cleaves Y.
+
 ### What about plain ERN names and color names?
 
 Parts like `CasE`, `Csy4`, `PgU` (no `_rec_` in the name) have **no recognition sequence** on their mRNA. No ERN can inhibit them. They are always active when expressed.

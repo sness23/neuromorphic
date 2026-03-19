@@ -1,0 +1,44 @@
+[
+   {
+      name: "ANDgate",
+      description: "ng DNA = 650",
+      content: [
+         {
+            sources: [
+               {
+                  plasmid: "CasE",
+                  ratio: 0.15384615384615385,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "Csy4",
+                  ratio: 0.15384615384615385,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "eBFP2",
+                  ratio: 0.15384615384615385,
+               },
+               {
+                  plasmid: "mNeonGreen",
+                  ratio: 0.23076923076923078,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "CasE_rec_Csy4_rec_mKO2",
+                  ratio: 0.3076923076923077,
+               },
+            ],
+         },
+      ],
+   },
+]

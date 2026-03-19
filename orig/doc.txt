@@ -1,0 +1,42 @@
+ How to Grow (Almost) Anything 2026                                                       Edited March 11, 2026
+
+ Lab Protocol: Genetic Circuits II - Intracellular Artificial Neural Networks
+
+
+Pre-Lab | Overview
+Download Neuromorphic Wizard: download this folder NeuromorphicWizard onto your machine by clicking “Download all” in the upper right. Follow the instructions in ‘README.md’ for a step-by-step installation guide.
+
+
+Familiarize yourself with the concepts behind each component of the lab: 1) how endoribonucleases can be used to perform arithmetic inside of cells and 2) how Lipofectamine 3000 works to transfect plasmids into human cells.
+
+
+
+Schematic of a CRISPR endoribonuclease, Csy4, that recognizes eBFP mRNA.
+
+Molecular mechanism of Lipofectamine 3000, used to transfect DNA into HEK293 cells and many more.
+
+Overview | Background
+In this two-day lab, you will design and build your very own IANN using a library of plasmids from the Ron Weiss lab and human embryonic kidney (HEK) 293 cells. IANNs differ from traditional synthetic genetic circuits because IANNs can perform analog computations, rather than being limited to digital computations. IANNs are also universal function approximators–given an adequate number of intracellular artificial neurons, you can use an IANN to achieve any input/output behavior you’d like.
+
+
+Overview | Concepts Learned & Skills Gained
+This is a lab with a dry and wet component. In the dry lab component, you will design a neuromorphic circuit in groups of 3. Once your design has been finalized, you will write instructions for an OT-2 to build your circuit for you. In the wet lab component, a TA will upload your OT-2 instructions and you will observe the OT-2 building and transfecting your IANN into HEK293 cells.
+
+
+Protocol | Overview
+Day 1: To write instructions for the OT-2 to execute, simply make a copy of and fill out this Google Sheet template: HTGAA 2026 Genetic Circuit Design Template 
+
+
+Key info: The "Concentration" column will always be 50 ng/μL and the sum of all numbers in the "DNA wanted (ng)" column should never exceed 650. Follow the naming conventions for the "Contents" column using this list of part names: HTGAA 2026 Genetic Circuit Part Names This is important for simulating your circuit's behavior.
+
+
+Your group must complete a spreadsheet and upload it to this Google Form by 4pm ET on Friday. MIT/Harvard student groups may upload 1 circuit per group and Global submissions will be limited to 2 submissions per node.
+
+
+Day 2: MIT/Harvard students: Go to NE-47 on MIT campus and a TA will escort you to the Weiss lab. You will observe the OT-2 building and transfecting your neuromorphic circuit into HEK293 cells. Global students: videos of the OT-2 will be posted.
+
+
+
+Schematic of a Sequestron, the building block of neuromorphic genetic circuits.
+
+

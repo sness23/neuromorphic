@@ -1,0 +1,6 @@
+Circuit name,Transfection group,Contents,Concentration (ng/uL),DNA wanted (ng)
+MyCircuit,X1,Csy4,50,150
+MyCircuit,X1,mKO2,50,100
+MyCircuit,X2,Csy4_rec_CasE,50,100
+MyCircuit,X2,eBFP2,50,100
+MyCircuit,Bias,CasE_rec_mNeonGreen,50,200

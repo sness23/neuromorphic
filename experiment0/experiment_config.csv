@@ -1,0 +1,6 @@
+Circuit name,Transfection group,Contents,Concentration (ng/uL),DNA wanted (ng),DNA source,DNA destination,L3K/OM MM destination,Plate destination,Diluted source
+MyCircuit,X1,Csy4,50,150,A1.1,A6.1,B3.1,A1.1,
+MyCircuit,X1,mKO2,50,100,A2.1,A6.1,B3.1,A1.1,
+MyCircuit,X2,Csy4_rec_CasE,50,100,A3.1,B1.1,B4.1,A1.1,
+MyCircuit,X2,eBFP2,50,100,A4.1,B1.1,B4.1,A1.1,
+MyCircuit,Bias,CasE_rec_mNeonGreen,50,200,A5.1,B2.1,B5.1,A1.1,

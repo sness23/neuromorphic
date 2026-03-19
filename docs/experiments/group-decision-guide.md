@@ -4,10 +4,10 @@
 
 We're building a circuit inside living cells using three tools:
 - **ERN enzymes** (Csy4, CasE, PgU) that destroy specific mRNA, preventing proteins from being made
-- **Wiring parts** that connect ERNs to each other (e.g., `Csy4_rec_CasE` means Csy4 destroys CasE)
+- **Wiring parts** that connect ERNs to each other (e.g., `Csy4_rec_CasE` means Csy4 inhibits CasE)
 - **Fluorescent reporters** (green, orange, blue, maroon) so we can see what's happening
 
-The naming rule: **`A_rec_B`** means "A destroys B." If A is present, B gets shut off.
+The naming rule: **`X_rec_Y`** means "X inhibits Y." X is the inhibitor whose recognition sequence is on Y's mRNA. If X is present, Y gets shut off.
 
 Total DNA budget: **650 ng max.**
 
@@ -18,7 +18,7 @@ Total DNA budget: **650 ng max.**
 **Concept:** Chain all 3 ERNs together. The longest possible inhibition chain with our parts.
 
 ```
-CasE ──kills──▶ Csy4 ──kills──▶ PgU ──kills──▶ mNeonGreen (green)
+PgU ──kills──▶ Csy4 ──kills──▶ CasE ──kills──▶ mNeonGreen (green)
 ```
 
 Three inhibitions = green is **OFF**. (Odd number of negatives = negative.)
@@ -27,12 +27,12 @@ Three inhibitions = green is **OFF**. (Odd number of negatives = negative.)
 
 | Group | Plasmid | Amount | Role |
 |-------|---------|--------|------|
-| X1 | CasE | 150 ng | Input enzyme |
+| X1 | PgU | 150 ng | Input enzyme |
 | X1 | eBFP2 | 50 ng | Blue control light |
-| X2 | Csy4_rec_CasE | 100 ng | Csy4, killed by CasE |
+| X2 | PgU_rec_Csy4 | 100 ng | Csy4, killed by PgU |
 | X2 | mMaroon1 | 50 ng | Maroon control light |
-| X3 | PgU_rec_Csy4 | 100 ng | PgU, killed by Csy4 |
-| Bias | PgU_rec_mNeonGreen | 200 ng | Green, killed by PgU |
+| X3 | Csy4_rec_CasE | 100 ng | CasE, killed by Csy4 |
+| Bias | CasE_rec_mNeonGreen | 200 ng | Green, killed by CasE |
 
 **Expected result:** Blue ON, Maroon ON, Green **OFF**
 
@@ -68,46 +68,46 @@ We include both ERNs, so orange is **OFF**.
 
 ## Option C: Competing Inhibitors
 
-**Concept:** One dominant ERN (CasE, high dose) controls the whole network. It kills both Csy4 and the green output directly.
+**Concept:** One dominant ERN (PgU, high dose) controls the whole network. It kills both Csy4 and the green output directly.
 
 ```
-CasE (strong) ──kills──▶ Csy4 (weak, dies)
-              ──kills──▶ mNeonGreen (green, OFF)
+PgU (strong) ──kills──▶ Csy4 (weak, dies)
+             ──kills──▶ mNeonGreen (green, OFF)
 
-Csy4 (dead) ──can't kill──▶ PgU (survives, but has nothing to do)
+Csy4 (dead) ──can't kill──▶ CasE (survives, but has nothing to do)
 ```
 
 | Group | Plasmid | Amount | Role |
 |-------|---------|--------|------|
-| X1 | CasE | 200 ng | Dominant enzyme |
+| X1 | PgU | 200 ng | Dominant enzyme |
 | X1 | eBFP2 | 50 ng | Blue control light |
-| X2 | Csy4_rec_CasE | 100 ng | Csy4, killed by CasE |
+| X2 | PgU_rec_Csy4 | 100 ng | Csy4, killed by PgU |
 | X2 | mMaroon1 | 50 ng | Maroon control light |
-| X3 | PgU_rec_Csy4 | 100 ng | PgU, freed because Csy4 is dead |
-| Bias | CasE_rec_mNeonGreen | 150 ng | Green, killed by CasE |
+| X3 | Csy4_rec_CasE | 100 ng | CasE, freed because Csy4 is dead |
+| Bias | PgU_rec_mNeonGreen | 150 ng | Green, killed by PgU |
 
 **Expected result:** Blue ON, Maroon ON, Green **OFF**
 
-**Why it's interesting:** Shows that dosage (ng amounts) determines who wins. You could run a second experiment with CasE reduced to 50 ng to see if the outcome changes — demonstrating the analog nature of the circuit.
+**Why it's interesting:** Shows that dosage (ng amounts) determines who wins. You could run a second experiment with PgU reduced to 50 ng to see if the outcome changes — demonstrating the analog nature of the circuit.
 
 ---
 
 ## Option D: Double Negative + AND Gate
 
-**Concept:** Combine a CasE→Csy4 inhibition chain with the AND gate output, plus three constitutive controls.
+**Concept:** Combine a Csy4→CasE inhibition chain with the AND gate output, plus three constitutive controls.
 
 ```
-CasE ──kills──▶ Csy4
+Csy4 ──kills──▶ CasE
 
-CasE ──kills──┐
+Csy4 ──kills──┐
               ├──▶ mKO2 (orange, OFF)
-Csy4 (dead) ──┘
+CasE (dead) ──┘
 ```
 
 | Group | Plasmid | Amount | Role |
 |-------|---------|--------|------|
-| X1 | CasE | 150 ng | Input enzyme |
-| X2 | Csy4_rec_CasE | 100 ng | Csy4, killed by CasE |
+| X1 | Csy4 | 150 ng | Input enzyme |
+| X2 | Csy4_rec_CasE | 100 ng | CasE, killed by Csy4 |
 | Output | CasE_rec_Csy4_rec_mKO2 | 150 ng | Orange AND gate |
 | Control1 | eBFP2 | 100 ng | Blue control light |
 | Control2 | mMaroon1 | 50 ng | Maroon control light |
@@ -115,7 +115,7 @@ Csy4 (dead) ──┘
 
 **Expected result:** Blue ON, Maroon ON, Green ON, Orange **OFF**
 
-**Why it's interesting:** Most complex design — combines a chain with an AND gate. Three control colors give strong confirmation that transfection worked. CasE alone is enough to keep orange off even though Csy4 is already dead.
+**Why it's interesting:** Most complex design — combines a chain with an AND gate. Three control colors give strong confirmation that transfection worked. Csy4 alone is enough to keep orange off even though CasE is already dead.
 
 ---
 
@@ -125,8 +125,8 @@ Csy4 (dead) ──┘
 |---|-----------|-----------------|------------|-----------------|
 | **A: Cascade** | All 3 | Green OFF | Medium | Default circuit (green ON) |
 | **B: AND Gate** | 2 | Orange OFF | Simple | Control with 0 or 1 ERN |
-| **C: Competing** | All 3 | Green OFF | Medium | Same circuit, lower CasE dose |
-| **D: Double+AND** | 2 (1 regulated) | Orange OFF | High | Control without CasE |
+| **C: Competing** | All 3 | Green OFF | Medium | Same circuit, lower PgU dose |
+| **D: Double+AND** | 2 (1 regulated) | Orange OFF | High | Control without Csy4 |
 
 ## Recommendation
 

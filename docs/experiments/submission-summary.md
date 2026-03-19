@@ -15,12 +15,12 @@ We are submitting two circuits that demonstrate fundamentally different neuromor
 **Architecture:** Linear chain of 3 ERNs
 
 ```
-CasE ──▶ Csy4 ──▶ PgU ──▶ mNeonGreen (green)
-  │         │        │          │
+PgU ──▶ Csy4 ──▶ CasE ──▶ mNeonGreen (green)
+  |         |        |          |
 ACTIVE   KILLED   ACTIVE      OFF
 ```
 
-**Parts used:** CasE, eBFP2, Csy4_rec_CasE, mMaroon1, PgU_rec_Csy4, PgU_rec_mNeonGreen
+**Parts used:** PgU, eBFP2, PgU_rec_Csy4, mMaroon1, Csy4_rec_CasE, CasE_rec_mNeonGreen
 
 **Total DNA:** 650 ng
 
@@ -63,7 +63,7 @@ Csy4 ──┘
 | Aspect | Circuit 1 | Circuit 2 |
 |--------|-----------|-----------|
 | Architecture | Serial (chain) | Parallel (convergent) |
-| ERNs | All 3 (CasE, Csy4, PgU) | 2 (CasE, Csy4) |
+| ERNs | All 3 (PgU, Csy4, CasE) | 2 (CasE, Csy4) |
 | Logic type | Cascade/sequential | Logic gate |
 | Output reporter | Green (mNeonGreen) | Orange (mKO2) |
 | Key concept | Chain length flips output | Multiple inputs on one target |
@@ -104,4 +104,4 @@ Both circuits passed OT-2 simulation successfully in the NeuromorphicWizard:
 - **Circuit 1:** 6 source tubes → 4 mixing groups → 4 Lipofectamine tubes → Well A1
 - **Circuit 2:** 5 source tubes → 4 mixing groups → 4 Lipofectamine tubes → Well A1
 
-No errors, no volume violations, all DNA concentrations within pipettable range (≥ 1 uL).
+No errors, no volume violations, all DNA concentrations within pipettable range (>= 1 uL).

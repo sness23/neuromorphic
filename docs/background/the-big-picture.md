@@ -36,11 +36,11 @@ This is the most important concept in the lab. Let's go through it very carefull
 
 ```
 DNA (plasmid)
-    │
-    ▼  transcription (cell copies DNA into mRNA)
+    |
+    v  transcription (cell copies DNA into mRNA)
 mRNA (messenger RNA)
-    │
-    ▼  translation (cell reads mRNA to build protein)
+    |
+    v  translation (cell reads mRNA to build protein)
 Protein (the final product that does something)
 ```
 
@@ -54,12 +54,12 @@ Think of it like a paper shredder that only shreds documents with a specific bar
 
 ```
 ERN protein (e.g., Csy4)
-    │
-    ▼  scans all mRNA in the cell
-    │
-    ├── mRNA without recognition sequence → IGNORED (survives)
-    │
-    └── mRNA WITH Csy4 recognition sequence → CUT AND DESTROYED
+    |
+    v  scans all mRNA in the cell
+    |
+    |-- mRNA without recognition sequence → IGNORED (survives)
+    |
+    └-- mRNA WITH Csy4 recognition sequence → CUT AND DESTROYED
          (protein never gets made)
 ```
 
@@ -73,11 +73,11 @@ The naming convention tells you exactly what inhibits what:
 - So if Csy4 protein is present in the cell, it will find this mRNA and cut it
 - Result: **Csy4 inhibits CasE production**
 
-Read it as: "[inhibitor]\_rec\_[target]" → the inhibitor destroys the target.
+Read it as: "[inhibitor]\_rec\_[target]" — the inhibitor destroys the target.
 
 More examples:
-- `CasE_rec_mNeonGreen` → CasE destroys mNeonGreen mRNA → **CasE inhibits green fluorescence**
-- `PgU_rec_Csy4` → Csy4 destroys PgU mRNA → **Csy4 inhibits PgU production**
+- `CasE_rec_mNeonGreen` → CasE recognition sequence on mNeonGreen's mRNA → **CasE inhibits green fluorescence**
+- `PgU_rec_Csy4` → PgU recognition sequence on Csy4's mRNA → **PgU inhibits Csy4 production**
 - `CasE_rec_Csy4_rec_mKO2` → mKO2's mRNA has recognition sequences for **both** CasE and Csy4 → **either one can destroy it**
 
 ### The Three ERNs
@@ -146,9 +146,9 @@ Two negatives make a positive.
 
 ### Triple Inhibition
 ```
-CasE ──inhibits──► Csy4 ──inhibits──► PgU ──inhibits──► mNeonGreen
+PgU ──inhibits──► Csy4 ──inhibits──► CasE ──inhibits──► mNeonGreen
 
-CasE kills Csy4 → Csy4 can't kill PgU → PgU kills mNeonGreen → green is OFF
+PgU kills Csy4 → Csy4 can't kill CasE → CasE kills mNeonGreen → green is OFF
 Three negatives make a negative.
 ```
 

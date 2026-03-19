@@ -14,7 +14,7 @@ This project designs and tests **intracellular artificial neural networks (IANNs
 - **Wiring parts** that connect ERNs to each other via engineered recognition sequences
 - **Fluorescent reporters** (green, orange, blue, maroon) that make the circuit output visible under a microscope
 
-The key idea: `A_rec_B` means "A destroys B." Chain enough of these together and you get a neural network performing computation inside a living cell.
+The key idea: `X_rec_Y` means "X inhibits Y." Chain enough of these together and you get a neural network performing computation inside a living cell.
 
 ---
 
@@ -115,7 +115,7 @@ neuromorphic/
 Uses all 3 available ERNs in a chain. Adding a third inhibition layer flips the output compared to the default 2-layer circuit.
 
 ```
-CasE ──▶ Csy4 ──▶ PgU ──▶ mNeonGreen (green)
+PgU ──▶ Csy4 ──▶ CasE ──▶ mNeonGreen (green)
  ON      OFF      ON       OFF
 ```
 

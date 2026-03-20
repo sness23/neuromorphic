@@ -1,7 +1,7 @@
-Circuit name,Transfection group,Contents,Concentration (ng/uL),DNA wanted (ng),DNA source,DNA destination,L3K/OM MM destination,Plate destination,Diluted source
-ThreeLayer,X1,CasE,50,150,A1.1,B1.1,B5.1,A1.1,
-ThreeLayer,X1,eBFP2,50,50,A2.1,B1.1,B5.1,A1.1,C3.1
-ThreeLayer,X2,Csy4_rec_CasE,50,100,A3.1,B2.1,B6.1,A1.1,
-ThreeLayer,X2,mMaroon1,50,50,A4.1,B2.1,B6.1,A1.1,C4.1
-ThreeLayer,X3,PgU_rec_Csy4,50,100,A5.1,B3.1,C1.1,A1.1,
-ThreeLayer,Bias,PgU_rec_mNeonGreen,50,200,A6.1,B4.1,C2.1,A1.1,
+Circuit name,Transfection group,Contents,Concentration (ng/uL),DNA wanted (ng)
+ThreeLayer,X1,PgU,50,150
+ThreeLayer,X1,eBFP2,50,50
+ThreeLayer,X2,PgU_rec_Csy4,50,100
+ThreeLayer,X2,mMaroon1,50,50
+ThreeLayer,X3,Csy4_rec_CasE,50,100
+ThreeLayer,Bias,CasE_rec_mNeonGreen,50,200

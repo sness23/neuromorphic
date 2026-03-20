@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuromorphic Circuit Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0a0a1a;
+    color: #e0e0e0;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1a3e, #2a1a4e);
+    padding: 24px 32px;
+    border-bottom: 1px solid #333;
+  }
+  header h1 { font-size: 24px; font-weight: 600; }
+  header p { color: #888; margin-top: 4px; font-size: 14px; }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    background: #111;
+    border-bottom: 2px solid #222;
+  }
+  .tab {
+    padding: 14px 28px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    font-size: 14px;
+    color: #888;
+    transition: all 0.2s;
+    margin-bottom: -2px;
+  }
+  .tab:hover { color: #ccc; background: #1a1a2e; }
+  .tab.active { color: #7c9cff; border-bottom-color: #7c9cff; }
+
+  .circuit-panel {
+    display: none;
+    padding: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .circuit-panel.active { display: block; }
+
+  .circuit-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .circuit-desc {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .diagram-container {
+    background: #111827;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+
+  svg text { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  /* Node styles */
+  .node-ern { fill: #1e3a5f; stroke: #3b82f6; stroke-width: 2; }
+  .node-ern-off { fill: #1a1a2e; stroke: #4b5563; stroke-width: 2; stroke-dasharray: 6 3; }
+  .node-reporter-on { stroke-width: 2; }
+  .node-reporter-off { fill: #1a1a2e; stroke: #4b5563; stroke-width: 2; stroke-dasharray: 6 3; }
+
+  .label-ern { fill: #93c5fd; font-size: 16px; font-weight: 600; }
+  .label-ern-off { fill: #6b7280; font-size: 16px; font-weight: 600; }
+  .label-reporter { font-size: 14px; font-weight: 600; }
+  .label-status { font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+  .label-plasmid { fill: #6b7280; font-size: 11px; }
+
+  .edge-inhibit { stroke: #ef4444; stroke-width: 2; fill: none; }
+  .edge-inhibit-inactive { stroke: #4b5563; stroke-width: 2; fill: none; stroke-dasharray: 6 3; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #9ca3af;
+  }
+  .legend-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+  }
+
+  /* Info cards */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .info-card {
+    background: #111827;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .info-card h3 {
+    font-size: 13px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #1e293b;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .status-on { color: #4ade80; font-weight: 600; }
+  .status-off { color: #f87171; font-weight: 600; }
+
+  /* DNA budget bar */
+  .budget-bar {
+    background: #1e293b;
+    border-radius: 6px;
+    height: 24px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .budget-fill {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    transition: width 0.5s;
+  }
+
+  /* Glow animations */
+  @keyframes pulse-green {
+    0%, 100% { filter: drop-shadow(0 0 6px #4ade80); }
+    50% { filter: drop-shadow(0 0 14px #4ade80); }
+  }
+  @keyframes pulse-orange {
+    0%, 100% { filter: drop-shadow(0 0 6px #fb923c); }
+    50% { filter: drop-shadow(0 0 14px #fb923c); }
+  }
+  @keyframes pulse-blue {
+    0%, 100% { filter: drop-shadow(0 0 6px #60a5fa); }
+    50% { filter: drop-shadow(0 0 14px #60a5fa); }
+  }
+  @keyframes pulse-maroon {
+    0%, 100% { filter: drop-shadow(0 0 6px #b45c5c); }
+    50% { filter: drop-shadow(0 0 14px #b45c5c); }
+  }
+  .glow-green { animation: pulse-green 2s ease-in-out infinite; }
+  .glow-orange { animation: pulse-orange 2s ease-in-out infinite; }
+  .glow-blue { animation: pulse-blue 2s ease-in-out infinite; }
+  .glow-maroon { animation: pulse-maroon 2s ease-in-out infinite; }
+
+  /* Tooltip */
+  .tooltip {
+    position: absolute;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 300px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+  .tooltip.visible { opacity: 1; }
+  .tooltip h4 { color: #93c5fd; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Neuromorphic Genetic Circuit Viewer</h1>
+  <p>HTGAA 2026 Week 7 &mdash; Intracellular Artificial Neural Networks</p>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="showCircuit(0)">Experiment 0: Default (2-Layer)</div>
+  <div class="tab" onclick="showCircuit(1)">Experiment 1: Three-Layer Cascade</div>
+  <div class="tab" onclick="showCircuit(2)">Experiment 2: AND Gate</div>
+</div>
+
+<!-- ==================== EXPERIMENT 0 ==================== -->
+<div class="circuit-panel active" id="panel-0">
+  <div class="circuit-title">Default Circuit &mdash; 2-Layer Cascade</div>
+  <div class="circuit-desc">
+    Csy4 inhibits CasE, which would inhibit mNeonGreen. Double negative &rarr; green is <strong>ON</strong>.
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6;"></div> Active ERN enzyme</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#4b5563; border: 1px dashed #6b7280;"></div> Suppressed ERN</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#ef4444;"></div> Active inhibition</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#4b5563;"></div> Inactive inhibition</div>
+  </div>
+
+  <div class="diagram-container">
+    <svg viewBox="0 0 900 260" width="100%" height="260">
+      <defs>
+        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+        </marker>
+        <marker id="flathead-red" markerWidth="2" markerHeight="14" refX="1" refY="7" orient="auto">
+          <rect x="0" y="0" width="2" height="14" fill="#ef4444"/>
+        </marker>
+        <marker id="flathead-gray" markerWidth="2" markerHeight="14" refX="1" refY="7" orient="auto">
+          <rect x="0" y="0" width="2" height="14" fill="#4b5563"/>
+        </marker>
+      </defs>
+
+      <!-- Csy4 (ACTIVE) -->
+      <g class="node" data-tip="Csy4: Endoribonuclease expressed at 150ng. Freely active — cuts Csy4 recognition sequences on target mRNA.">
+        <rect x="60" y="60" width="140" height="64" rx="12" class="node-ern"/>
+        <text x="130" y="88" text-anchor="middle" class="label-ern">Csy4</text>
+        <text x="130" y="108" text-anchor="middle" class="label-status status-on">ACTIVE</text>
+        <text x="130" y="142" text-anchor="middle" class="label-plasmid">150 ng</text>
+      </g>
+
+      <!-- Inhibition arrow: Csy4 → CasE -->
+      <line x1="200" y1="92" x2="340" y2="92" class="edge-inhibit" marker-end="url(#flathead-red)"/>
+      <text x="270" y="82" text-anchor="middle" fill="#ef4444" font-size="11">inhibits</text>
+      <text x="270" y="112" text-anchor="middle" class="label-plasmid">Csy4_rec_CasE</text>
+
+      <!-- CasE (SUPPRESSED) -->
+      <g class="node" data-tip="CasE: Encoded by Csy4_rec_CasE plasmid. Its mRNA has a Csy4 recognition site, so Csy4 destroys it. CasE protein is NOT produced.">
+        <rect x="350" y="60" width="140" height="64" rx="12" class="node-ern-off"/>
+        <text x="420" y="88" text-anchor="middle" class="label-ern-off">CasE</text>
+        <text x="420" y="108" text-anchor="middle" class="label-status status-off">SUPPRESSED</text>
+        <text x="420" y="142" text-anchor="middle" class="label-plasmid">100 ng</text>
+      </g>
+
+      <!-- Inhibition arrow: CasE → mNeonGreen (inactive) -->
+      <line x1="490" y1="92" x2="630" y2="92" class="edge-inhibit-inactive" marker-end="url(#flathead-gray)"/>
+      <text x="560" y="82" text-anchor="middle" fill="#4b5563" font-size="11">cannot inhibit</text>
+      <text x="560" y="112" text-anchor="middle" class="label-plasmid">CasE_rec_mNeonGreen</text>
+
+      <!-- mNeonGreen (ON) -->
+      <g class="node glow-green" data-tip="mNeonGreen: Green fluorescent reporter. Its mRNA has a CasE recognition site, but CasE is suppressed. mNeonGreen is freely expressed — GREEN ON.">
+        <rect x="640" y="60" width="160" height="64" rx="12" style="fill:#064e2a; stroke:#4ade80; stroke-width:2;"/>
+        <text x="720" y="88" text-anchor="middle" fill="#4ade80" font-size="16" font-weight="600">mNeonGreen</text>
+        <text x="720" y="108" text-anchor="middle" class="label-status status-on">ON</text>
+        <text x="720" y="142" text-anchor="middle" class="label-plasmid">200 ng</text>
+      </g>
+
+      <!-- Control reporters -->
+      <g class="node glow-orange" data-tip="mKO2: Orange fluorescent reporter. Constitutive — no recognition sequences. Transfection control.">
+        <rect x="60" y="180" width="120" height="50" rx="10" style="fill:#5c320a; stroke:#fb923c; stroke-width:2;"/>
+        <text x="120" y="203" text-anchor="middle" fill="#fb923c" font-size="14" font-weight="600">mKO2</text>
+        <text x="120" y="218" text-anchor="middle" class="label-status status-on">ON</text>
+      </g>
+      <text x="120" y="250" text-anchor="middle" class="label-plasmid">Control (100 ng)</text>
+
+      <g class="node glow-blue" data-tip="eBFP2: Blue fluorescent reporter. Constitutive — no recognition sequences. Transfection control.">
+        <rect x="210" y="180" width="120" height="50" rx="10" style="fill:#1e2a5f; stroke:#60a5fa; stroke-width:2;"/>
+        <text x="270" y="203" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="600">eBFP2</text>
+        <text x="270" y="218" text-anchor="middle" class="label-status status-on">ON</text>
+      </g>
+      <text x="270" y="250" text-anchor="middle" class="label-plasmid">Control (100 ng)</text>
+    </svg>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>ERN Activity</h3>
+      <div class="info-row"><span>Csy4</span><span class="status-on">ACTIVE</span></div>
+      <div class="info-row"><span>CasE</span><span class="status-off">SUPPRESSED</span></div>
+    </div>
+    <div class="info-card">
+      <h3>Reporter Output</h3>
+      <div class="info-row"><span>mNeonGreen (circuit output)</span><span class="status-on">ON</span></div>
+      <div class="info-row"><span>mKO2 (control)</span><span class="status-on">ON</span></div>
+      <div class="info-row"><span>eBFP2 (control)</span><span class="status-on">ON</span></div>
+    </div>
+    <div class="info-card">
+      <h3>DNA Budget</h3>
+      <div class="info-row"><span>Total</span><span>650 / 650 ng</span></div>
+      <div class="budget-bar"><div class="budget-fill" style="width:100%; background: linear-gradient(90deg, #3b82f6, #7c3aed);">100%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== EXPERIMENT 1 ==================== -->
+<div class="circuit-panel" id="panel-1">
+  <div class="circuit-title">Three-Layer Cascade</div>
+  <div class="circuit-desc">
+    PgU &rarr; Csy4 &rarr; CasE &rarr; mNeonGreen. Three layers of inhibition (odd) &rarr; green is <strong>OFF</strong>.
+    Same output reporter as Experiment 0, opposite result.
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6;"></div> Active ERN</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#4b5563; border: 1px dashed #6b7280;"></div> Suppressed ERN</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#ef4444;"></div> Active inhibition</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#4b5563;"></div> Inactive inhibition</div>
+  </div>
+
+  <div class="diagram-container">
+    <svg viewBox="0 0 1100 260" width="100%" height="260">
+      <!-- PgU (ACTIVE) -->
+      <g class="node" data-tip="PgU: Endoribonuclease expressed at 150ng. No ERN targets it — freely active. First enzyme in the cascade.">
+        <rect x="30" y="60" width="130" height="64" rx="12" class="node-ern"/>
+        <text x="95" y="88" text-anchor="middle" class="label-ern">PgU</text>
+        <text x="95" y="108" text-anchor="middle" class="label-status status-on">ACTIVE</text>
+        <text x="95" y="142" text-anchor="middle" class="label-plasmid">150 ng</text>
+      </g>
+
+      <!-- PgU → Csy4 -->
+      <line x1="160" y1="92" x2="290" y2="92" class="edge-inhibit" marker-end="url(#flathead-red)"/>
+      <text x="225" y="82" text-anchor="middle" fill="#ef4444" font-size="11">inhibits</text>
+      <text x="225" y="112" text-anchor="middle" class="label-plasmid">PgU_rec_Csy4</text>
+
+      <!-- Csy4 (SUPPRESSED) -->
+      <g class="node" data-tip="Csy4: Encoded by PgU_rec_Csy4. Its mRNA has a PgU recognition site. PgU destroys it — Csy4 is NOT produced.">
+        <rect x="300" y="60" width="130" height="64" rx="12" class="node-ern-off"/>
+        <text x="365" y="88" text-anchor="middle" class="label-ern-off">Csy4</text>
+        <text x="365" y="108" text-anchor="middle" class="label-status status-off">SUPPRESSED</text>
+        <text x="365" y="142" text-anchor="middle" class="label-plasmid">100 ng</text>
+      </g>
+
+      <!-- Csy4 → CasE (inactive) -->
+      <line x1="430" y1="92" x2="560" y2="92" class="edge-inhibit-inactive" marker-end="url(#flathead-gray)"/>
+      <text x="495" y="82" text-anchor="middle" fill="#4b5563" font-size="11">cannot inhibit</text>
+      <text x="495" y="112" text-anchor="middle" class="label-plasmid">Csy4_rec_CasE</text>
+
+      <!-- CasE (ACTIVE — because Csy4 is suppressed) -->
+      <g class="node" data-tip="CasE: Encoded by Csy4_rec_CasE. Its mRNA has a Csy4 recognition site, but Csy4 is suppressed by PgU. CasE is freely expressed.">
+        <rect x="570" y="60" width="130" height="64" rx="12" class="node-ern"/>
+        <text x="635" y="88" text-anchor="middle" class="label-ern">CasE</text>
+        <text x="635" y="108" text-anchor="middle" class="label-status status-on">ACTIVE</text>
+        <text x="635" y="142" text-anchor="middle" class="label-plasmid">100 ng</text>
+      </g>
+
+      <!-- CasE → mNeonGreen (active) -->
+      <line x1="700" y1="92" x2="840" y2="92" class="edge-inhibit" marker-end="url(#flathead-red)"/>
+      <text x="770" y="82" text-anchor="middle" fill="#ef4444" font-size="11">inhibits</text>
+      <text x="770" y="112" text-anchor="middle" class="label-plasmid">CasE_rec_mNeonGreen</text>
+
+      <!-- mNeonGreen (OFF) -->
+      <g class="node" data-tip="mNeonGreen: Green reporter. Its mRNA has a CasE recognition site. CasE is active and destroys it — GREEN OFF.">
+        <rect x="850" y="60" width="160" height="64" rx="12" class="node-reporter-off"/>
+        <text x="930" y="88" text-anchor="middle" fill="#6b7280" font-size="16" font-weight="600">mNeonGreen</text>
+        <text x="930" y="108" text-anchor="middle" class="label-status status-off">OFF</text>
+        <text x="930" y="142" text-anchor="middle" class="label-plasmid">200 ng</text>
+      </g>
+
+      <!-- Control reporters -->
+      <g class="node glow-blue" data-tip="eBFP2: Blue fluorescent reporter. Constitutive. Transfection control.">
+        <rect x="30" y="180" width="120" height="50" rx="10" style="fill:#1e2a5f; stroke:#60a5fa; stroke-width:2;"/>
+        <text x="90" y="203" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="600">eBFP2</text>
+        <text x="90" y="218" text-anchor="middle" class="label-status status-on">ON</text>
+      </g>
+      <text x="90" y="250" text-anchor="middle" class="label-plasmid">Control (50 ng)</text>
+
+      <g class="node glow-maroon" data-tip="mMaroon1: Maroon fluorescent reporter. Constitutive. Transfection control.">
+        <rect x="180" y="180" width="120" height="50" rx="10" style="fill:#3d1a1a; stroke:#b45c5c; stroke-width:2;"/>
+        <text x="240" y="203" text-anchor="middle" fill="#b45c5c" font-size="14" font-weight="600">mMaroon1</text>
+        <text x="240" y="218" text-anchor="middle" class="label-status status-on">ON</text>
+      </g>
+      <text x="240" y="250" text-anchor="middle" class="label-plasmid">Control (50 ng)</text>
+    </svg>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>ERN Activity</h3>
+      <div class="info-row"><span>PgU</span><span class="status-on">ACTIVE</span></div>
+      <div class="info-row"><span>Csy4</span><span class="status-off">SUPPRESSED</span></div>
+      <div class="info-row"><span>CasE</span><span class="status-on">ACTIVE</span></div>
+    </div>
+    <div class="info-card">
+      <h3>Reporter Output</h3>
+      <div class="info-row"><span>mNeonGreen (circuit output)</span><span class="status-off">OFF</span></div>
+      <div class="info-row"><span>eBFP2 (control)</span><span class="status-on">ON</span></div>
+      <div class="info-row"><span>mMaroon1 (control)</span><span class="status-on">ON</span></div>
+    </div>
+    <div class="info-card">
+      <h3>Cascade Logic</h3>
+      <div class="info-row"><span>Layers</span><span>3 (odd)</span></div>
+      <div class="info-row"><span>Output parity</span><span class="status-off">NEGATIVE</span></div>
+      <div class="info-row"><span>vs Default</span><span>Opposite result</span></div>
+    </div>
+    <div class="info-card">
+      <h3>DNA Budget</h3>
+      <div class="info-row"><span>Total</span><span>650 / 650 ng</span></div>
+      <div class="budget-bar"><div class="budget-fill" style="width:100%; background: linear-gradient(90deg, #3b82f6, #7c3aed);">100%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== EXPERIMENT 2 ==================== -->
+<div class="circuit-panel" id="panel-2">
+  <div class="circuit-title">AND Gate</div>
+  <div class="circuit-desc">
+    Two ERNs (CasE and Csy4) converge on a single target with dual recognition sequences.
+    Either enzyme alone is sufficient to suppress mKO2. Both are present &rarr; orange is <strong>OFF</strong>.
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6;"></div> Active ERN</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#ef4444;"></div> Active inhibition</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#4b5563; border: 1px dashed #6b7280;"></div> Suppressed output</div>
+  </div>
+
+  <div class="diagram-container">
+    <svg viewBox="0 0 900 340" width="100%" height="340">
+      <!-- CasE (ACTIVE) -->
+      <g class="node" data-tip="CasE: Endoribonuclease expressed at 100ng. Freely active — no ERN targets it. One of two inputs to the AND gate.">
+        <rect x="80" y="40" width="140" height="64" rx="12" class="node-ern"/>
+        <text x="150" y="68" text-anchor="middle" class="label-ern">CasE</text>
+        <text x="150" y="88" text-anchor="middle" class="label-status status-on">ACTIVE</text>
+        <text x="150" y="122" text-anchor="middle" class="label-plasmid">100 ng (X1)</text>
+      </g>
+
+      <!-- Csy4 (ACTIVE) -->
+      <g class="node" data-tip="Csy4: Endoribonuclease expressed at 100ng. Freely active — no ERN targets it. Second input to the AND gate.">
+        <rect x="80" y="160" width="140" height="64" rx="12" class="node-ern"/>
+        <text x="150" y="188" text-anchor="middle" class="label-ern">Csy4</text>
+        <text x="150" y="208" text-anchor="middle" class="label-status status-on">ACTIVE</text>
+        <text x="150" y="242" text-anchor="middle" class="label-plasmid">100 ng (X2)</text>
+      </g>
+
+      <!-- Convergence lines -->
+      <line x1="220" y1="72" x2="420" y2="132" class="edge-inhibit" marker-end="url(#flathead-red)"/>
+      <line x1="220" y1="192" x2="420" y2="132" class="edge-inhibit" marker-end="url(#flathead-red)"/>
+
+      <!-- AND gate symbol -->
+      <g data-tip="AND gate: CasE_rec_Csy4_rec_mKO2 has recognition sequences for BOTH CasE and Csy4. Either enzyme can cut this mRNA.">
+        <circle cx="380" cy="132" r="22" fill="#1a1a2e" stroke="#ef4444" stroke-width="2"/>
+        <text x="380" y="128" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700">AND</text>
+        <text x="380" y="140" text-anchor="middle" fill="#ef4444" font-size="9">(NOR)</text>
+      </g>
+
+      <!-- inhibits labels -->
+      <text x="300" y="80" text-anchor="middle" fill="#ef4444" font-size="11">inhibits</text>
+      <text x="300" y="205" text-anchor="middle" fill="#ef4444" font-size="11">inhibits</text>
+
+      <!-- mKO2 (OFF) -->
+      <g class="node" data-tip="mKO2: Orange reporter. Its mRNA has BOTH CasE and Csy4 recognition sequences. Both enzymes are active and cutting it — ORANGE OFF.">
+        <rect x="450" y="100" width="160" height="64" rx="12" class="node-reporter-off"/>
+        <text x="530" y="128" text-anchor="middle" fill="#6b7280" font-size="16" font-weight="600">mKO2</text>
+        <text x="530" y="148" text-anchor="middle" class="label-status status-off">OFF</text>
+        <text x="530" y="182" text-anchor="middle" class="label-plasmid">200 ng (Output)</text>
+      </g>
+
+      <line x1="400" y1="132" x2="448" y2="132" class="edge-inhibit" marker-end="url(#flathead-red)"/>
+
+      <!-- Plasmid label -->
+      <text x="530" y="198" text-anchor="middle" class="label-plasmid">CasE_rec_Csy4_rec_mKO2</text>
+
+      <!-- Control reporters -->
+      <g class="node glow-blue" data-tip="eBFP2: Blue fluorescent reporter. Constitutive. Transfection control.">
+        <rect x="80" y="270" width="120" height="50" rx="10" style="fill:#1e2a5f; stroke:#60a5fa; stroke-width:2;"/>
+        <text x="140" y="293" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="600">eBFP2</text>
+        <text x="140" y="308" text-anchor="middle" class="label-status status-on">ON</text>
+      </g>
+      <text x="140" y="338" text-anchor="middle" class="label-plasmid">Control (100 ng)</text>
+
+      <g class="node glow-green" data-tip="mNeonGreen: Green fluorescent reporter. Constitutive — used as control here. No ERN targets it.">
+        <rect x="230" y="270" width="140" height="50" rx="10" style="fill:#064e2a; stroke:#4ade80; stroke-width:2;"/>
+        <text x="300" y="293" text-anchor="middle" fill="#4ade80" font-size="14" font-weight="600">mNeonGreen</text>
+        <text x="300" y="308" text-anchor="middle" class="label-status status-on">ON</text>
+      </g>
+      <text x="300" y="338" text-anchor="middle" class="label-plasmid">Control (150 ng)</text>
+
+      <!-- Truth table -->
+      <g transform="translate(660, 40)">
+        <text x="0" y="0" fill="#6b7280" font-size="12" font-weight="700" letter-spacing="1">TRUTH TABLE</text>
+        <rect x="-8" y="10" width="220" height="26" rx="4" fill="#1e293b"/>
+        <text x="0" y="28" fill="#9ca3af" font-size="11" font-weight="600">CasE</text>
+        <text x="65" y="28" fill="#9ca3af" font-size="11" font-weight="600">Csy4</text>
+        <text x="130" y="28" fill="#9ca3af" font-size="11" font-weight="600">mKO2</text>
+
+        <text x="0" y="52" fill="#9ca3af" font-size="11">No</text>
+        <text x="65" y="52" fill="#9ca3af" font-size="11">No</text>
+        <text x="130" y="52" fill="#4ade80" font-size="11" font-weight="600">ON</text>
+
+        <text x="0" y="72" fill="#9ca3af" font-size="11">Yes</text>
+        <text x="65" y="72" fill="#9ca3af" font-size="11">No</text>
+        <text x="130" y="72" fill="#f87171" font-size="11" font-weight="600">OFF</text>
+
+        <text x="0" y="92" fill="#9ca3af" font-size="11">No</text>
+        <text x="65" y="92" fill="#9ca3af" font-size="11">Yes</text>
+        <text x="130" y="92" fill="#f87171" font-size="11" font-weight="600">OFF</text>
+
+        <rect x="-8" y="99" width="220" height="22" rx="4" fill="#1a2744"/>
+        <text x="0" y="115" fill="#93c5fd" font-size="11" font-weight="600">Yes</text>
+        <text x="65" y="115" fill="#93c5fd" font-size="11" font-weight="600">Yes</text>
+        <text x="130" y="115" fill="#f87171" font-size="11" font-weight="600">OFF</text>
+        <text x="175" y="115" fill="#7c9cff" font-size="10">&larr; ours</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>ERN Activity</h3>
+      <div class="info-row"><span>CasE</span><span class="status-on">ACTIVE</span></div>
+      <div class="info-row"><span>Csy4</span><span class="status-on">ACTIVE</span></div>
+    </div>
+    <div class="info-card">
+      <h3>Reporter Output</h3>
+      <div class="info-row"><span>mKO2 (circuit output)</span><span class="status-off">OFF</span></div>
+      <div class="info-row"><span>eBFP2 (control)</span><span class="status-on">ON</span></div>
+      <div class="info-row"><span>mNeonGreen (control)</span><span class="status-on">ON</span></div>
+    </div>
+    <div class="info-card">
+      <h3>Gate Logic</h3>
+      <div class="info-row"><span>Type</span><span>NOR gate</span></div>
+      <div class="info-row"><span>Inputs</span><span>2 (parallel)</span></div>
+      <div class="info-row"><span>Special part</span><span>Dual-rec plasmid</span></div>
+    </div>
+    <div class="info-card">
+      <h3>DNA Budget</h3>
+      <div class="info-row"><span>Total</span><span>650 / 650 ng</span></div>
+      <div class="budget-bar"><div class="budget-fill" style="width:100%; background: linear-gradient(90deg, #3b82f6, #7c3aed);">100%</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+function showCircuit(idx) {
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.circuit-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+}
+
+// Tooltips
+const tooltip = document.getElementById('tooltip');
+document.querySelectorAll('[data-tip]').forEach(el => {
+  el.style.cursor = 'pointer';
+  el.addEventListener('mouseenter', e => {
+    const tip = el.getAttribute('data-tip');
+    tooltip.innerHTML = '<h4>' + tip.split(':')[0] + '</h4>' + tip.split(':').slice(1).join(':');
+    tooltip.classList.add('visible');
+  });
+  el.addEventListener('mousemove', e => {
+    tooltip.style.left = (e.pageX + 16) + 'px';
+    tooltip.style.top = (e.pageY - 10) + 'px';
+  });
+  el.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('visible');
+  });
+});
+</script>
+</body>
+</html>

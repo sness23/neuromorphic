@@ -1,0 +1,6 @@
+Circuit name,Transfection group,Contents,Concentration (ng/uL),DNA wanted (ng)
+ANDgate,X1,CasE,50,100
+ANDgate,X2,Csy4,50,100
+ANDgate,Output,CasE_rec_Csy4_rec_mKO2,50,200
+ANDgate,Control,eBFP2,50,100
+ANDgate,Control,mNeonGreen,50,150

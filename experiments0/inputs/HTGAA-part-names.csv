@@ -1,0 +1,5 @@
+ERNs,ERN_rec_ERN,ERN_rec_color,Colors
+CasE,PgU_rec_Csy4,Csy4_rec_mNeonGreen,mKO2
+Csy4 ,PgU_rec_CasE,CasE_rec_mNeonGreen,eBFP2
+PgU,Csy4_rec_CasE,PgU_rec_mNeonGreen,mMaroon1
+,CasE_rec_Csy4,CasE_rec_Csy4_rec_mKO2,mNeonGreen

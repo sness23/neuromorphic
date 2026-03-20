@@ -1,0 +1,48 @@
+[
+   {
+      name: "ThreeLayer",
+      description: "ng DNA = 650",
+      content: [
+         {
+            sources: [
+               {
+                  plasmid: "PgU",
+                  ratio: 0.23076923076923078,
+               },
+               {
+                  plasmid: "eBFP2",
+                  ratio: 0.07692307692307693,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "PgU_rec_Csy4",
+                  ratio: 0.15384615384615385,
+               },
+               {
+                  plasmid: "mMaroon1",
+                  ratio: 0.07692307692307693,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "Csy4_rec_CasE",
+                  ratio: 0.15384615384615385,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "CasE_rec_mNeonGreen",
+                  ratio: 0.3076923076923077,
+               },
+            ],
+         },
+      ],
+   },
+]

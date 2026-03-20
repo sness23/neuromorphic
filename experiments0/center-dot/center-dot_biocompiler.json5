@@ -1,0 +1,108 @@
+[
+   {
+      name: "DotSelf",
+      description: "ng DNA = 650",
+      content: [
+         {
+            sources: [
+               {
+                  plasmid: "Csy4",
+                  ratio: 0.19230769230769232,
+               },
+               {
+                  plasmid: "Csy4_rec_mNeonGreen",
+                  ratio: 0.19230769230769232,
+               },
+               {
+                  plasmid: "eBFP2",
+                  ratio: 0.11538461538461539,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "CasE",
+                  ratio: 0.19230769230769232,
+               },
+               {
+                  plasmid: "CasE_rec_mNeonGreen",
+                  ratio: 0.19230769230769232,
+               },
+               {
+                  plasmid: "mMaroon1",
+                  ratio: 0.11538461538461539,
+               },
+            ],
+         },
+      ],
+   },
+   {
+      name: "DotXOR",
+      description: "ng DNA = 650",
+      content: [
+         {
+            sources: [
+               {
+                  plasmid: "Csy4",
+                  ratio: 0.19230769230769232,
+               },
+               {
+                  plasmid: "CasE_rec_mNeonGreen",
+                  ratio: 0.19230769230769232,
+               },
+               {
+                  plasmid: "eBFP2",
+                  ratio: 0.11538461538461539,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "CasE",
+                  ratio: 0.19230769230769232,
+               },
+               {
+                  plasmid: "Csy4_rec_mNeonGreen",
+                  ratio: 0.19230769230769232,
+               },
+               {
+                  plasmid: "mMaroon1",
+                  ratio: 0.11538461538461539,
+               },
+            ],
+         },
+      ],
+   },
+   {
+      name: "DotGrad",
+      description: "ng DNA = 650",
+      content: [
+         {
+            sources: [
+               {
+                  plasmid: "Csy4_rec_mNeonGreen",
+                  ratio: 0.3076923076923077,
+               },
+               {
+                  plasmid: "eBFP2",
+                  ratio: 0.15384615384615385,
+               },
+            ],
+         },
+         {
+            sources: [
+               {
+                  plasmid: "Csy4",
+                  ratio: 0.38461538461538464,
+               },
+               {
+                  plasmid: "mMaroon1",
+                  ratio: 0.15384615384615385,
+               },
+            ],
+         },
+      ],
+   },
+]

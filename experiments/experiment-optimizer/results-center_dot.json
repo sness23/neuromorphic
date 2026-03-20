@@ -1,0 +1,1383 @@
+[
+  {
+    "rank": 1,
+    "name": "Opt0097",
+    "score_mse": 0.10504681433551266,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "CasE",
+        "ng": 100
+      },
+      {
+        "group": "X1",
+        "part": "mKO2",
+        "ng": 150
+      },
+      {
+        "group": "X2",
+        "part": "Csy4",
+        "ng": 75
+      },
+      {
+        "group": "X2",
+        "part": "mMaroon1",
+        "ng": 200
+      },
+      {
+        "group": "X3",
+        "part": "Csy4_rec_CasE",
+        "ng": 50
+      },
+      {
+        "group": "Bias",
+        "part": "CasE_rec_mNeonGreen",
+        "ng": 75
+      }
+    ],
+    "recipe": {
+      "name": "Opt0097",
+      "input_order": [
+        "mKO2",
+        "mMaroon1"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "mKO2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mMaroon1",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.2727272727272727,
+            0.7272727272727273
+          ]
+        },
+        {
+          "name": "x3",
+          "units": [
+            {
+              "name": "x3_output",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "CasE",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        },
+        {
+          "name": "bias",
+          "units": [
+            {
+              "name": "bias_output",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "mNeonGreen",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 2,
+    "name": "Opt0110",
+    "score_mse": 0.11096198973279672,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "Csy4",
+        "ng": 100
+      },
+      {
+        "group": "X1",
+        "part": "mKO2",
+        "ng": 175
+      },
+      {
+        "group": "X2",
+        "part": "CasE",
+        "ng": 75
+      },
+      {
+        "group": "X2",
+        "part": "mMaroon1",
+        "ng": 125
+      },
+      {
+        "group": "X3",
+        "part": "Csy4_rec_CasE",
+        "ng": 125
+      },
+      {
+        "group": "X1",
+        "part": "CasE_rec_mNeonGreen",
+        "ng": 50
+      }
+    ],
+    "recipe": {
+      "name": "Opt0110",
+      "input_order": [
+        "mKO2",
+        "mMaroon1"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "mKO2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            },
+            {
+              "name": "x1_output",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "mNeonGreen",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.3076923076923077,
+            0.5384615384615384,
+            0.15384615384615385
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mMaroon1",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.375,
+            0.625
+          ]
+        },
+        {
+          "name": "x3",
+          "units": [
+            {
+              "name": "x3_output",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "CasE",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 3,
+    "name": "Opt0131",
+    "score_mse": 0.1118307488167476,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "Csy4",
+        "ng": 100
+      },
+      {
+        "group": "X1",
+        "part": "mMaroon1",
+        "ng": 50
+      },
+      {
+        "group": "X2",
+        "part": "CasE",
+        "ng": 100
+      },
+      {
+        "group": "X2",
+        "part": "mNeonGreen",
+        "ng": 75
+      },
+      {
+        "group": "X3",
+        "part": "PgU",
+        "ng": 75
+      },
+      {
+        "group": "X3",
+        "part": "PgU_rec_CasE",
+        "ng": 200
+      },
+      {
+        "group": "Bias",
+        "part": "CasE_rec_Csy4_rec_mKO2",
+        "ng": 50
+      }
+    ],
+    "recipe": {
+      "name": "Opt0131",
+      "input_order": [
+        "mMaroon1",
+        "mNeonGreen"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "mMaroon1",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.6666666666666666,
+            0.3333333333333333
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mNeonGreen",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.5714285714285714,
+            0.42857142857142855
+          ]
+        },
+        {
+          "name": "x3",
+          "units": [
+            {
+              "name": "x3_ern",
+              "slots": [
+                "hEF1a",
+                "PgU",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x3_output",
+              "slots": [
+                "hEF1a",
+                "PgU_rec",
+                "CasE",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.2727272727272727,
+            0.7272727272727273
+          ]
+        },
+        {
+          "name": "bias",
+          "units": [
+            {
+              "name": "bias_output_1",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "mKO2",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "bias_output_2",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "mKO2",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.5,
+            0.5
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 4,
+    "name": "Opt0054",
+    "score_mse": 0.11344813326885467,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "CasE",
+        "ng": 100
+      },
+      {
+        "group": "X1",
+        "part": "mKO2",
+        "ng": 75
+      },
+      {
+        "group": "X2",
+        "part": "Csy4",
+        "ng": 125
+      },
+      {
+        "group": "X2",
+        "part": "mMaroon1",
+        "ng": 175
+      },
+      {
+        "group": "X3",
+        "part": "Csy4_rec_CasE",
+        "ng": 50
+      },
+      {
+        "group": "Bias",
+        "part": "CasE_rec_mNeonGreen",
+        "ng": 125
+      }
+    ],
+    "recipe": {
+      "name": "Opt0054",
+      "input_order": [
+        "mKO2",
+        "mMaroon1"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "mKO2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.5714285714285714,
+            0.42857142857142855
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mMaroon1",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.4166666666666667,
+            0.5833333333333334
+          ]
+        },
+        {
+          "name": "x3",
+          "units": [
+            {
+              "name": "x3_output",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "CasE",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        },
+        {
+          "name": "bias",
+          "units": [
+            {
+              "name": "bias_output",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "mNeonGreen",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 5,
+    "name": "Opt0028",
+    "score_mse": 0.11513157988886216,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "Csy4",
+        "ng": 75
+      },
+      {
+        "group": "X1",
+        "part": "eBFP2",
+        "ng": 75
+      },
+      {
+        "group": "X2",
+        "part": "CasE",
+        "ng": 50
+      },
+      {
+        "group": "X2",
+        "part": "mMaroon1",
+        "ng": 50
+      },
+      {
+        "group": "X3",
+        "part": "PgU",
+        "ng": 100
+      },
+      {
+        "group": "X3",
+        "part": "CasE_rec_Csy4",
+        "ng": 200
+      },
+      {
+        "group": "Bias",
+        "part": "Csy4_rec_mNeonGreen",
+        "ng": 100
+      }
+    ],
+    "recipe": {
+      "name": "Opt0028",
+      "input_order": [
+        "eBFP2",
+        "mMaroon1"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "eBFP2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mMaroon1",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "x3",
+          "units": [
+            {
+              "name": "x3_ern",
+              "slots": [
+                "hEF1a",
+                "PgU",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x3_output",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.3333333333333333,
+            0.6666666666666666
+          ]
+        },
+        {
+          "name": "bias",
+          "units": [
+            {
+              "name": "bias_output",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "mNeonGreen",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 6,
+    "name": "Opt0139",
+    "score_mse": 0.1172640326701432,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "Csy4",
+        "ng": 100
+      },
+      {
+        "group": "X1",
+        "part": "eBFP2",
+        "ng": 200
+      },
+      {
+        "group": "X2",
+        "part": "CasE",
+        "ng": 100
+      },
+      {
+        "group": "X2",
+        "part": "mKO2",
+        "ng": 50
+      },
+      {
+        "group": "X1",
+        "part": "CasE_rec_Csy4",
+        "ng": 50
+      },
+      {
+        "group": "Bias",
+        "part": "Csy4_rec_mNeonGreen",
+        "ng": 150
+      }
+    ],
+    "recipe": {
+      "name": "Opt0139",
+      "input_order": [
+        "eBFP2",
+        "mKO2"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "eBFP2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            },
+            {
+              "name": "x1_output",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.2857142857142857,
+            0.5714285714285714,
+            0.14285714285714285
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mKO2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.6666666666666666,
+            0.3333333333333333
+          ]
+        },
+        {
+          "name": "bias",
+          "units": [
+            {
+              "name": "bias_output",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "mNeonGreen",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 7,
+    "name": "Opt0136",
+    "score_mse": 0.11752198071941822,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "Csy4",
+        "ng": 75
+      },
+      {
+        "group": "X1",
+        "part": "eBFP2",
+        "ng": 175
+      },
+      {
+        "group": "X2",
+        "part": "CasE",
+        "ng": 100
+      },
+      {
+        "group": "X2",
+        "part": "mMaroon1",
+        "ng": 50
+      },
+      {
+        "group": "X3",
+        "part": "PgU",
+        "ng": 100
+      },
+      {
+        "group": "X3",
+        "part": "CasE_rec_Csy4",
+        "ng": 100
+      },
+      {
+        "group": "Bias",
+        "part": "Csy4_rec_mNeonGreen",
+        "ng": 50
+      }
+    ],
+    "recipe": {
+      "name": "Opt0136",
+      "input_order": [
+        "eBFP2",
+        "mMaroon1"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "eBFP2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.3,
+            0.7
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mMaroon1",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.6666666666666666,
+            0.3333333333333333
+          ]
+        },
+        {
+          "name": "x3",
+          "units": [
+            {
+              "name": "x3_ern",
+              "slots": [
+                "hEF1a",
+                "PgU",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x3_output",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "bias",
+          "units": [
+            {
+              "name": "bias_output",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "mNeonGreen",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 8,
+    "name": "Opt0073",
+    "score_mse": 0.11881775849573557,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "CasE",
+        "ng": 175
+      },
+      {
+        "group": "X1",
+        "part": "eBFP2",
+        "ng": 50
+      },
+      {
+        "group": "X2",
+        "part": "Csy4",
+        "ng": 75
+      },
+      {
+        "group": "X2",
+        "part": "mMaroon1",
+        "ng": 75
+      },
+      {
+        "group": "X3",
+        "part": "PgU_rec_CasE",
+        "ng": 175
+      },
+      {
+        "group": "X1",
+        "part": "CasE_rec_Csy4_rec_mKO2",
+        "ng": 100
+      }
+    ],
+    "recipe": {
+      "name": "Opt0073",
+      "input_order": [
+        "eBFP2",
+        "mMaroon1"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "eBFP2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            },
+            {
+              "name": "x1_output_1",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "mKO2",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_output_2",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "mKO2",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.5384615384615384,
+            0.15384615384615385,
+            0.15384615384615385,
+            0.15384615384615385
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mMaroon1",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "x3",
+          "units": [
+            {
+              "name": "x3_output",
+              "slots": [
+                "hEF1a",
+                "PgU_rec",
+                "CasE",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 9,
+    "name": "Opt0057",
+    "score_mse": 0.11958607797904162,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "Csy4",
+        "ng": 50
+      },
+      {
+        "group": "X1",
+        "part": "eBFP2",
+        "ng": 75
+      },
+      {
+        "group": "X2",
+        "part": "CasE",
+        "ng": 75
+      },
+      {
+        "group": "X2",
+        "part": "mMaroon1",
+        "ng": 100
+      },
+      {
+        "group": "X3",
+        "part": "PgU",
+        "ng": 50
+      },
+      {
+        "group": "X3",
+        "part": "CasE_rec_Csy4",
+        "ng": 200
+      },
+      {
+        "group": "Bias",
+        "part": "Csy4_rec_mNeonGreen",
+        "ng": 100
+      }
+    ],
+    "recipe": {
+      "name": "Opt0057",
+      "input_order": [
+        "eBFP2",
+        "mMaroon1"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "eBFP2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mMaroon1",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            }
+          ],
+          "ratios": [
+            0.42857142857142855,
+            0.5714285714285714
+          ]
+        },
+        {
+          "name": "x3",
+          "units": [
+            {
+              "name": "x3_ern",
+              "slots": [
+                "hEF1a",
+                "PgU",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x3_output",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.2,
+            0.8
+          ]
+        },
+        {
+          "name": "bias",
+          "units": [
+            {
+              "name": "bias_output",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "mNeonGreen",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rank": 10,
+    "name": "Opt0094",
+    "score_mse": 0.1200504526565607,
+    "total_dna": 650,
+    "parts": [
+      {
+        "group": "X1",
+        "part": "CasE",
+        "ng": 175
+      },
+      {
+        "group": "X1",
+        "part": "eBFP2",
+        "ng": 125
+      },
+      {
+        "group": "X2",
+        "part": "Csy4",
+        "ng": 75
+      },
+      {
+        "group": "X2",
+        "part": "mNeonGreen",
+        "ng": 75
+      },
+      {
+        "group": "X1",
+        "part": "PgU_rec_Csy4",
+        "ng": 125
+      },
+      {
+        "group": "X2",
+        "part": "CasE_rec_Csy4_rec_mKO2",
+        "ng": 75
+      }
+    ],
+    "recipe": {
+      "name": "Opt0094",
+      "input_order": [
+        "eBFP2",
+        "mNeonGreen"
+      ],
+      "content": [
+        {
+          "name": "x1",
+          "units": [
+            {
+              "name": "x1_ern",
+              "slots": [
+                "hEF1a",
+                "CasE",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x1_marker",
+              "slots": [
+                "hEF1a",
+                "eBFP2",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            },
+            {
+              "name": "x1_output",
+              "slots": [
+                "hEF1a",
+                "PgU_rec",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.4117647058823529,
+            0.29411764705882354,
+            0.29411764705882354
+          ]
+        },
+        {
+          "name": "x2",
+          "units": [
+            {
+              "name": "x2_ern",
+              "slots": [
+                "hEF1a",
+                "Csy4",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_marker",
+              "slots": [
+                "hEF1a",
+                "mNeonGreen",
+                "L0.T_4560"
+              ],
+              "no_masking": true
+            },
+            {
+              "name": "x2_output_1",
+              "slots": [
+                "hEF1a",
+                "CasE_rec",
+                "mKO2",
+                "L0.T_4560"
+              ]
+            },
+            {
+              "name": "x2_output_2",
+              "slots": [
+                "hEF1a",
+                "Csy4_rec",
+                "mKO2",
+                "L0.T_4560"
+              ]
+            }
+          ],
+          "ratios": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.16666666666666666,
+            0.16666666666666666
+          ]
+        }
+      ]
+    }
+  }
+]

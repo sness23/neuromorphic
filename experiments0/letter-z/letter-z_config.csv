@@ -1,0 +1,20 @@
+Circuit name,Transfection group,Contents,Concentration (ng/uL),DNA wanted (ng),DNA source,DNA destination,L3K/OM MM destination,Plate destination,Diluted source,Transfection type
+ZDual,X1,CasE,50,125,A1.1,B6.1,D5.1,A1.1,,Co
+ZDual,X1,eBFP2,50,75,A2.1,B6.1,D5.1,A1.1,B4.2,Co
+ZDual,X2,Csy4,50,125,A3.1,C1.1,D6.1,A1.1,,Co
+ZDual,X2,mNeonGreen,50,75,A4.1,C1.1,D6.1,A1.1,B5.2,Co
+ZDual,Bias,CasE_rec_Csy4_rec_mKO2,50,250,A5.1,C2.1,A1.2,A1.1,,Single
+ZCross,X1,CasE,50,125,A1.1,C3.1,A2.2,A2.1,,Co
+ZCross,X1,eBFP2,50,75,A2.1,C3.1,A2.2,A2.1,B4.2,Co
+ZCross,X2,Csy4,50,125,A3.1,C4.1,A3.2,A2.1,,Co
+ZCross,X2,mMaroon1,50,75,A6.1,C4.1,A3.2,A2.1,B6.2,Co
+ZCross,X3,CasE_rec_Csy4,50,100,B1.1,C5.1,A4.2,A2.1,,Single
+ZCross,Bias,Csy4_rec_mNeonGreen,50,150,B2.1,C6.1,A5.2,A2.1,,Single
+ZFull,X1,CasE,50,100,A1.1,D1.1,A6.2,A3.1,,Co
+ZFull,X1,mKO2,50,75,B3.1,D1.1,A6.2,A3.1,C1.2,Co
+ZFull,X2,Csy4,50,100,A3.1,D2.1,B1.2,A3.1,,Co
+ZFull,X2,eBFP2,50,75,A2.1,D2.1,B1.2,A3.1,B4.2,Co
+ZFull,X3,PgU,50,75,B4.1,D3.1,B2.2,A3.1,C2.2,Co
+ZFull,X3,CasE_rec_Csy4,50,75,B1.1,D3.1,B2.2,A3.1,C3.2,Co
+ZFull,Bias,PgU_rec_CasE,50,75,B5.1,D4.1,B3.2,A3.1,C4.2,Co
+ZFull,Bias,Csy4_rec_mNeonGreen,50,75,B2.1,D4.1,B3.2,A3.1,C5.2,Co
